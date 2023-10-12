@@ -29,9 +29,61 @@ pull:
 
 # the deployments section allows you to provide configuration for deploying flows
 deployments:
+- name: dep-child-a
+  version:
+  tags: [child]
+  description:
+  entrypoint: child_flows.py:child_flow_a
+  parameters: {}
+  work_pool:
+    name: my-k8s-pool
+    work_queue_name:
+    job_variables:
+      image: '{{ build-image.image }}'
+  schedule:
+
+- name: dep-child-b
+  version:
+  tags: [child]
+  description:
+  entrypoint: child_flows.py:child_flow_b
+  parameters: {}
+  work_pool:
+    name: my-k8s-pool
+    work_queue_name:
+    job_variables:
+      image: '{{ build-image.image }}'
+  schedule:
+
+- name: dep-child-c
+  version:
+  tags: [child]
+  description:
+  entrypoint: child_flows.py:child_flow_c
+  parameters: {}
+  work_pool:
+    name: my-k8s-pool
+    work_queue_name:
+    job_variables:
+      image: '{{ build-image.image }}'
+  schedule:
+
+- name: dep-child-d
+  version:
+  tags: [child]
+  description:
+  entrypoint: child_flows.py:child_flow_d
+  parameters: {}
+  work_pool:
+    name: my-k8s-pool
+    work_queue_name:
+    job_variables:
+      image: '{{ build-image.image }}'
+  schedule:
+
 - name: task-wrapped-k8s
   version: null
-  tags: []
+  tags: ['parent']
   description: null
   entrypoint: task_wrapped_deployments.py:task_wrapped_deployments
   parameters: {}
