@@ -12,7 +12,7 @@ build:
     requires: prefect-docker>=0.3.1
     id: build-image
     dockerfile: auto
-    image_name: docker.io/taycurran/task-wrapped-k8s
+    image_name: docker.io/taycurran/tay-qa-k8s
     tag: latest
 
 # push section allows you to manage if and how this project is uploaded to remote locations
@@ -36,7 +36,7 @@ deployments:
   entrypoint: child_flows.py:child_flow_a
   parameters: {}
   work_pool:
-    name: my-k8s-pool
+    name: tay-k8s-pool
     work_queue_name:
     job_variables:
       image: '{{ build-image.image }}'
@@ -49,7 +49,7 @@ deployments:
   entrypoint: child_flows.py:child_flow_b
   parameters: {}
   work_pool:
-    name: my-k8s-pool
+    name: tay-k8s-pool
     work_queue_name:
     job_variables:
       image: '{{ build-image.image }}'
@@ -62,7 +62,7 @@ deployments:
   entrypoint: child_flows.py:child_flow_c
   parameters: {}
   work_pool:
-    name: my-k8s-pool
+    name: tay-k8s-pool
     work_queue_name:
     job_variables:
       image: '{{ build-image.image }}'
@@ -75,21 +75,34 @@ deployments:
   entrypoint: child_flows.py:child_flow_d
   parameters: {}
   work_pool:
-    name: my-k8s-pool
+    name: tay-k8s-pool
     work_queue_name:
     job_variables:
       image: '{{ build-image.image }}'
   schedule:
 
 - name: task-wrapped-k8s
-  version: null
-  tags: ['parent']
-  description: null
+  version:
+  tags: [parent, sub-deployment]
+  description:
   entrypoint: task_wrapped_deployments.py:task_wrapped_deployments
   parameters: {}
   work_pool:
-    name: my-k8s-pool
-    work_queue_name: null
+    name: tay-k8s-pool
+    work_queue_name:
     job_variables:
       image: '{{ build-image.image }}'
-  schedule: null
+  schedule:
+
+- name: cancel-hook-k8s
+  version:
+  tags: [hook]
+  description:
+  entrypoint: cancel_hook.py:cancel_hook_flow
+  parameters: {}
+  work_pool:
+    name: tay-k8s-pool
+    work_queue_name:
+    job_variables:
+      image: '{{ build-image.image }}'
+  schedule:

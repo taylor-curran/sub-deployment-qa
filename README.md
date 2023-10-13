@@ -21,3 +21,8 @@ AWS_SECRET_ACCESS_KEY="<replace>"
 
 
 https://hub.docker.com/repository/docker/taycurran/task-wrapped-k8s/general
+
+For the cancellation hook QA
+
+
+`prefect deployment run 'cancel-hook-flow/process-cancel-hook' --param sleep_time=60`

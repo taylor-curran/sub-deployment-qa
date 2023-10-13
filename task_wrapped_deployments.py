@@ -97,6 +97,7 @@ def wrapper_task_c(sleep_time=0):
     task_runner=ConcurrentTaskRunner(),
     persist_result=True,
     result_storage=S3Bucket.load("result-storage"),
+    log_prints=True
 )
 def task_wrapped_deployments(
     sim_failure: SimulatedFailure = SimulatedFailure(), sleep_time_subflows: int = 0
