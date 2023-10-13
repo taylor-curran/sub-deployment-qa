@@ -1,6 +1,15 @@
 # sub-deployment-qa
 
-`pip install prefect prefect-aws prefect-kubernetes`
+`pip install prefect prefect-aws prefect-kubernetes python-dotenv`
+
+`.env`
+
+```
+AWS_ACCESS_KEY_ID="<replace>"
+AWS_SECRET_ACCESS_KEY="<replace>"
+```
+
+`python my_blocks.py`
 
 `prefect deploy --all`
 
