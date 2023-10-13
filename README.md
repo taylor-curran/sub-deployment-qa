@@ -13,9 +13,11 @@ AWS_SECRET_ACCESS_KEY="<replace>"
 
 `prefect work-pool create my-k8s-pool --type kubernetes`
 
+`prefect worker start --pool "tay-k8s-pool"`
+
 `prefect deploy --all`
 
-`prefect deployment run task-wrapped-deployments/task-wrapped-k8s --param sleep_time_subflows=70`
+`prefect deployment run task-wrapped-deployments/task-wrapped-k8s --param sleep_time_subflows=120`
 
 
 https://hub.docker.com/repository/docker/taycurran/task-wrapped-k8s/general
