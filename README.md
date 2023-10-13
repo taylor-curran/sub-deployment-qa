@@ -11,6 +11,8 @@ AWS_SECRET_ACCESS_KEY="<replace>"
 
 `python my_blocks.py`
 
+`prefect work-pool create my-k8s-pool --type kubernetes`
+
 `prefect deploy --all`
 
 `prefect deployment run task-wrapped-deployments/task-wrapped-k8s --param sleep_time_subflows=70`
